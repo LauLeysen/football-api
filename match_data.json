@@ -1,0 +1,45 @@
+[
+  {
+    "home_team": "Lamia",
+    "away_team": "Aris",
+    "status": "Live",
+    "time": "60'",
+    "score": "Lamia 2 - 1 Aris"
+  },
+  {
+    "home_team": "Olympiacos",
+    "away_team": "AEK Athens",
+    "status": "Upcoming 15 MAY 19:00",
+    "start_time": "15 MAY"
+  },
+  {
+    "home_team": "PAOK FC",
+    "away_team": "Panathinaikos",
+    "status": "Upcoming 15 MAY 19:00",
+    "start_time": "15 MAY"
+  },
+  {
+    "home_team": "PAOK FC",
+    "away_team": "Olympiacos",
+    "status": "Finished",
+    "result": "PAOK FC 2 - 0 Olympiacos"
+  },
+  {
+    "home_team": "Brighton",
+    "away_team": "Chelsea",
+    "status": "Upcoming 15 MAY 20:45",
+    "start_time": "15 MAY"
+  },
+  {
+    "home_team": "Manchester United",
+    "away_team": "Newcastle United",
+    "status": "Upcoming 15 MAY 21:00",
+    "start_time": "15 MAY"
+  },
+  {
+    "home_team": "Tottenham Hotspur",
+    "away_team": "Manchester City",
+    "status": "Finished",
+    "result": "Tottenham Hotspur 0 - 2 Manchester City"
+  }
+]
