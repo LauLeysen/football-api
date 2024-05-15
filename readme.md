@@ -19,8 +19,8 @@ This is a Flask API that provides information about football matches. The API re
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/yourusername/football-match-api.git
-    cd football-match-api
+    git clone https://github.com/MrSopia/livescore-scraper
+    cd livescore-scraper
     ```
 
 2. **Create a virtual environment (optional)**:
