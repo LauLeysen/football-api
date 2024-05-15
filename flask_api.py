@@ -50,12 +50,15 @@ def start_flask_app():
     app.run(debug=True, use_reloader=False)
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.create_task(load_data())
+    try:
+        loop = asyncio.get_event_loop()
+        loop.create_task(load_data())
 
-    # Run Flask app in a separate thread
-    flask_thread = threading.Thread(target=start_flask_app)
-    flask_thread.start()
+        # Run Flask app in a separate thread
+        flask_thread = threading.Thread(target=start_flask_app)
+        flask_thread.start()
 
-    # Run the asyncio event loop
-    loop.run_forever()
+        # Run the asyncio event loop
+        loop.run_forever()
+    except KeyboardInterrupt:
+        print("Scraper stopped by user.")
