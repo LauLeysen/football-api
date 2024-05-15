@@ -3,7 +3,7 @@
 This is a Flask API that provides information about football matches. The API reads data from a `match_data.json` file and dynamically updates when the file changes.
 
 ## Features
-- For more information on how to obtain this data check this repo [url]
+- For more information on how to obtain this data check this repo https://github.com/MrSopia/livescore-scraper
 - Retrieve all live matches.
 - Retrieve all upcoming matches.
 - Retrieve all finished matches and their results.
