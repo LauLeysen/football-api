@@ -2,9 +2,12 @@ import json
 import asyncio
 import threading
 from flask import Flask, request, jsonify
+from datetime import datetime
+import re
 
 app = Flask(__name__)
 match_data = []
+DATE_FORMAT = "%d %b %H:%M"
 
 async def load_data():
     global match_data
@@ -24,8 +27,16 @@ def get_live_matches():
 
 @app.route('/api/upcoming', methods=['GET'])
 def get_upcoming_matches():
-    upcoming_matches = [match for match in match_data if 'Upcoming' in match.get('status', '')]
-    return jsonify(upcoming_matches), 200
+    upcoming_matches = [match for match in match_data if 'Upcoming' in match['status']]
+    
+    # Extract datetime from the status string and sort by it
+    def extract_datetime(match):
+        match_status = match['status']
+        match_date_str = re.search(r'Upcoming (\d{1,2} \w{3} \d{2}:\d{2})', match_status).group(1)
+        return datetime.strptime(match_date_str, DATE_FORMAT)
+
+    sorted_upcoming_matches = sorted(upcoming_matches, key=extract_datetime)
+    return jsonify(sorted_upcoming_matches)
 
 @app.route('/api/finished', methods=['GET'])
 def get_finished_matches():
@@ -61,4 +72,4 @@ if __name__ == '__main__':
         # Run the asyncio event loop
         loop.run_forever()
     except KeyboardInterrupt:
-        print("Scraper stopped by user.")
+        print("API Stopped by user.")
