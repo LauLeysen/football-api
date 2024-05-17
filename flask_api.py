@@ -27,15 +27,23 @@ def get_live_matches():
 
 @app.route('/api/upcoming', methods=['GET'])
 def get_upcoming_matches():
-    upcoming_matches = [match for match in match_data if 'Upcoming' in match['status']]
+    upcoming_matches = [match for match in match_data if 'Upcoming' in match['status'] or 'DATE NOT FOUND' in match['status']]
     
-    # Extract datetime from the status string and sort by it
-    def extract_datetime(match):
-        match_status = match['status']
-        match_date_str = re.search(r'Upcoming (\d{1,2} \w{3} \d{2}:\d{2})', match_status).group(1)
-        return datetime.strptime(match_date_str, DATE_FORMAT)
 
-    sorted_upcoming_matches = sorted(upcoming_matches, key=extract_datetime)
+    # Extract datetime from the status string and start_time
+    def extract_datetime(match):
+        if 'DATE NOT FOUND' in match['status']:
+            # Return a very small datetime to place it at the beginning
+            return datetime.min
+        match_date_str = match['status'].replace('Upcoming ', '') + ' ' + match['start_time']
+        try:
+            return datetime.strptime(match_date_str, DATE_FORMAT)
+        except ValueError as e:
+            print(f"Error parsing date for match {match['home_team']} vs {match['away_team']}: {e}")
+            return datetime.max
+    
+    sorted_upcoming_matches = sorted(upcoming_matches, key=lambda x: (extract_datetime(x) == datetime.min, extract_datetime(x)))
+    print(sorted_upcoming_matches)
     return jsonify(sorted_upcoming_matches)
 
 @app.route('/api/finished', methods=['GET'])
